@@ -1,0 +1,18 @@
+<section class="position-relative overflow-hidden d-flex flex-column justify-content-center align-items-center" >
+  <span class="d-flex justify-content-center align-items-center close" >
+    <button   mat-button (click)="onNoClick()">
+      <i class="fa-solid fa-close" ></i>
+    </button>
+  </span>
+  <h2 >vew category !</h2>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Category name</mat-label>
+      <input readonly="true" [(ngModel)]="catName" aria-label="catName" type="text" matInput>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions [align] = "'end'">
+    <button  mat-raised-button cdkFocusInitial>Save</button>
+  </div>
+</section>
+

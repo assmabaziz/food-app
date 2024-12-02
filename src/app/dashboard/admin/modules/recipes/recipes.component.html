@@ -1,0 +1,190 @@
+<section class="main mb-3">
+  <div class="row align-items-center justify-content-between">
+    <div class="col-md-7">
+      <div class="px-4">
+        <h1 class="text-white">Recipe <span>!</span></h1>
+        <p class="w-75 text-white">
+          You can now add your items that any user can order it from the
+          Application and you can edit
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 text-end">
+      <img
+        src="../../../../assets/images/bg-plates.svg"
+        class="w-75"
+        alt="eating vegan"
+      />
+    </div>
+  </div>
+</section>
+<section class="secondary py-3 mb-3">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="px-5">
+        <h2>Recipe table details</h2>
+        <p>You can check all details</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="px-5 h-100 d-flex align-items-center justify-content-end">
+        <button
+          class="btn text-white px-2"
+          routerLink="add"
+        >
+          Add new recipe
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="categories-list border-0 card overflow-hidden">
+  <mat-card class="example-card">
+    <div class="d-flex justify-content-between align-items-center gap-4 my-3">
+      <div class="w-50">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Search by name recipe</mat-label>
+          <input
+            matInput
+            placeholder="Enter name recipe"
+            class="w-100"
+            [(ngModel)]="valueSearch"
+            (keydown.enter)="getAllRecipes()"
+          />
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="catgoryId" (selectionChange)="getAllRecipes()">
+          <mat-option
+            *ngFor="let category of recipeCategories"
+            [value]="category.id"
+            >{{ category.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tag</mat-label>
+        <mat-select [(ngModel)]="tagId" (selectionChange)="getAllRecipes()">
+          <mat-option *ngFor="let tag of recipeTags" [value]="tag.id">{{
+            tag.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-icon-button matTooltip="Primary" color="primary" aria-label="Example icon-button with a heart icon" (click)="clearAllFilters()">
+        <mat-icon>delete</mat-icon>
+      </button>
+      </div>
+
+    </div>
+    <table class="w-100 border-0 text-center">
+      <thead>
+        <tr>
+          <th scope="col">Recipe name</th>
+          <th scope="col">Image</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Tag</th>
+          <th scope="col">Category</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="listRecipes.length > 0">
+          <tr
+            *ngFor="let recipe of listRecipes; let isEven = even"
+            [ngClass]="isEven ? 'bg-white' : 'bg-tr-even'"
+          >
+            <td>{{ recipe.name }}</td>
+            <td class="w-25">
+              <div *ngIf="recipe.imagePath">
+                <img
+                  [src]="baseUrlImg + recipe.imagePath"
+                  class="w-25 rounded-lg border-success"
+                  [alt]="recipe.name"
+                />
+              </div>
+              <div *ngIf="!recipe.imagePath" >
+                <img
+                  src="../../../../assets/images/dummy-image-square.jpg"
+                  class="w-25 rounded-lg border-success"
+                  alt="no image"
+                />
+              </div>
+            </td>
+            <td>{{ recipe.price }}</td>
+            <td>{{ recipe.description | separatorWords }}</td>
+            <td>{{ recipe.tag.name }}</td>
+            <td>
+              <ng-container *ngIf="recipe.category.length > 0">
+                <span *ngFor="let recipeCategory of recipe.category">
+                  {{ recipeCategory.name }}
+                </span>
+              </ng-container>
+              <ng-container *ngIf="recipe.category.length == 0">
+                <span class="text-muted"> -- </span>
+              </ng-container>
+            </td>
+            <td>
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+              >
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  [routerLink]="['view', recipe.id]"
+                >
+                  <mat-icon class="text-success">visibility</mat-icon>
+                  <span>View</span>
+                </button>
+                <button
+                  mat-menu-item
+                  [routerLink]="['edit', recipe.id]"
+                >
+                  <mat-icon class="text-success">edit_note</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="openDialogDelete('100ms', '100ms', recipe)"
+                >
+                  <mat-icon class="text-success">delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+      <ng-container *ngIf="listRecipes.length == 0">
+        <tr>
+          <td colspan="6">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-7">
+                <app-no-data></app-no-data>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+    <div>
+      <mat-paginator
+        class="bg-inf ms-auto"
+        [pageSize]="pageSize"
+        [length]="fullResponce.totalNumberOfRecords"
+        [pageIndex]="pageNumber"
+        (page)="handlePageEvent($event)"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+  </mat-card>
+  <router-outlet></router-outlet>
+</section>

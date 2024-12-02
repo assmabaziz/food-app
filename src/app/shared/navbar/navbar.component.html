@@ -1,0 +1,320 @@
+<nav class="my-3">
+    <div class="row align-items-center">
+      <div class="col-md-7">
+        <div class="p-3  inner-search position-relative">
+          <input type="search" name="search" id="" class="w-100 border-0 rounded-2 px-4 py-1" placeholder="Search here">
+          <i class="fa-solid fa-magnifying-glass position-absolute icon-search"></i>
+        </div>
+
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <div class="row justify-content- align-items-center">
+          <div class="col-10 ">
+            <div class="d-flex align-items-center justify-content-end gap-3">
+              <div *ngIf="userData.imagePath">
+                <img [src]="imgBaseUrl+userData.imagePath" class="profile_image" [alt]="userData.userName" />
+              </div>
+              <ng-container *ngIf="!userData.imagePath">
+                <img src="./assets/images/pfile_image.svg" class="profile_image" alt="profile image">
+              </ng-container>
+
+               <div>
+                 <div class="btn-group ">
+                <button class="btn btn-sm dropdown-toggle border-0 fw-medium text-capitalize" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="btnMenu">
+                  {{userData.userName}}
+                </button>
+                <ul class="dropdown-menu py-2 ">
+                  <li><a class="d-block w-100 py-2 px-1 text-decoration-none text-body" (click)="getProfile()">
+                    <span class="me-1">
+                      <i class="fa-solid fa-user"></i>
+                    </span>
+                    profile</a></li>
+                  <li><a class="d-block w-100 py-2 px-1 text-decoration-none text-body" (click)="showForm()">
+                    <span class="me-1">
+                      <i class="fa-solid fa-lock"></i>
+                    </span>
+                    change password</a></li>
+                  <li><a class="d-block w-100 py-2 px-1 text-decoration-none text-body" (click)="logOut()">
+                    <span class="me-1">
+                      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </span>
+                    logout</a></li>
+                </ul>
+              </div>
+              <p>{{userGroup.name}}</p>
+               </div>
+
+            </div>
+          </div>
+          <div class="col-1">
+            <span>
+            <i class="fa-solid fa-bell notification position-relative"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</nav>
+<section class="position-absolute top-50 start-50 " [ngClass]="{'d-none':showFormChangePssword}">
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-10">
+        <div class="content p-3 bg-white position-relative">
+          <span class="close-form h5 opacity-75 position-absolute d-flex align-items-center justify-content-center" (click)="closeForm()">
+            <i class="fa-solid fa-close "></i>
+          </span>
+          <div class="logo text-center">
+            <img src="./assets/images/logo.svg" alt="logo" />
+          </div>
+          <div class="form">
+            <form
+            [formGroup]="uppdatePasswordForm"
+              (ngSubmit)="uppdateUserPassword(myForm)"
+              #myForm
+            >
+              <h2 >Change your password</h2>
+              <p>
+                Enter your details below
+              </p>
+              <div class="rows">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mb-3">
+                      <div class="input-group mb-1 position-relative">
+                        <span class="input-group-text" id="basic-addon3">
+                          <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input
+                          #oldPassword
+                          type="password"
+                          class="form-control"
+                          placeholder="Enter old password"
+                          aria-label="Password"
+                          aria-describedby="basic-addon3"
+                          formControlName="oldPassword"
+                        />
+                        <span
+                          class="show-password position-absolute top-50"
+                          role="button"
+                          (click)="
+                            passwordShow = true;
+                            passwordShow == true
+                              ? (oldPassword.type = 'text')
+                              : (oldPassword.type = 'password')
+                          "
+                          [ngClass]="{ 'd-none': passwordShow }"
+                        >
+                          <i class="fa-solid fa-eye"></i>
+                        </span>
+                        <span
+                          class="hide-password position-absolute top-50 d-none"
+                          role="button"
+                          (click)="
+                            passwordShow = false;
+                            passwordShow == false
+                              ? (oldPassword.type = 'password')
+                              : (oldPassword.type = 'text')
+                          "
+                          [ngClass]="{ 'd-none': !passwordShow }"
+                        >
+                          <i class="fa-solid fa-eye-slash"></i>
+                        </span>
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          uppdateData['oldPassword'].errors &&
+                          (uppdateData['oldPassword'].touched ||
+                            uppdateData['oldPassword'].dirty)
+                        "
+                        class="mb-3"
+                      >
+                      <div class="row align-items-center">
+                        <div class="col-1">
+                          <i class="fa-solid fa-circle-info text-danger"></i>
+                        </div>
+                        <div class="col-10">
+                          <p
+                          class="text-danger w-100 mx-auto p-1 mb-0"
+                          *ngIf="uppdatePasswordForm.get('oldPassword')?.errors?.['required']"
+                        >
+                          Old password is required
+                        </p>
+                        </div>
+                      </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="mb-3">
+                      <div class="input-group mb-1 position-relative">
+                        <span class="input-group-text" id="basic-addon3">
+                          <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input
+                          #newpassword
+                          type="password"
+                          class="form-control"
+                          placeholder="Enter new password"
+                          aria-label="Password"
+                          aria-describedby="basic-addon3"
+                          formControlName="newPassword"
+                        />
+                        <span
+                          class="show-password position-absolute top-50"
+                          role="button"
+                          (click)="
+                            confirmPasswordShow = true;
+                            confirmPasswordShow == true
+                              ? (newpassword.type = 'text')
+                              : (newpassword.type = 'password')
+                          "
+                          [ngClass]="{'d-none': confirmPasswordShow }"
+                        >
+                          <i class="fa-solid fa-eye"></i>
+                        </span>
+                        <span
+                          class="hide-password position-absolute top-50 d-none"
+                          role="button"
+                          (click)="
+                            confirmPasswordShow = false;
+                            confirmPasswordShow == false
+                              ? (newpassword.type = 'password')
+                              : (newpassword.type = 'text')
+                          "
+                          [ngClass]="{ 'd-none': !confirmPasswordShow }"
+                        >
+                          <i class="fa-solid fa-eye-slash"></i>
+                        </span>
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          uppdateData['newPassword'].errors &&
+                          (uppdateData['newPassword'].touched ||
+                            uppdateData['newPassword'].dirty)
+                        "
+                        class="mb-3"
+                      >
+                      <div class="row align-items-center">
+                        <div class="col-1">
+                          <i class="fa-solid fa-circle-info text-danger"></i>
+                        </div>
+                        <div class="col-10">
+                          <p
+                          class="text-danger w-100 mx-auto p-1 mb-0"
+                          *ngIf="uppdatePasswordForm.get('newPassword')?.errors?.['required']"
+                        >
+                          New password is required
+                        </p>
+                        <p
+                          class="text-danger w-100 mx-auto p-1 mb-0"
+                          *ngIf="uppdatePasswordForm.get('newPassword')?.errors?.['pattern']"
+                        >
+                          At least 6 chars, one capital letter, one small and one special character
+                        </p>
+                        </div>
+                      </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="mb-3">
+                      <div class="input-group mb-1 position-relative">
+                        <span class="input-group-text" id="basic-addon6">
+                          <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input
+                          #Repassword
+                          type="password"
+                          class="form-control"
+                          placeholder="Confirm new password"
+                          aria-label="Password"
+                          aria-describedby="basic-addon6"
+                          formControlName="confirmNewPassword"
+                        />
+                        <span
+                          class="show-password position-absolute top-50"
+                          role="button"
+                          (click)="
+                            confirmNewPasswordShow = true;
+                            confirmNewPasswordShow == true
+                              ? (Repassword.type = 'text')
+                              : (Repassword.type = 'password')
+                          "
+                          [ngClass]="{ 'd-none': confirmNewPasswordShow }"
+                        >
+                          <i class="fa-solid fa-eye"></i>
+                        </span>
+                        <span
+                          class="hide-password position-absolute top-50 d-none"
+                          role="button"
+                          (click)="
+                            confirmNewPasswordShow = false;
+                            confirmNewPasswordShow == false
+                              ? (Repassword.type = 'password')
+                              : (Repassword.type = 'text')
+                          "
+                          [ngClass]="{ 'd-none': !confirmNewPasswordShow }"
+                        >
+                          <i class="fa-solid fa-eye-slash"></i>
+                        </span>
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          uppdateData['confirmNewPassword'].errors &&
+                          (uppdateData['confirmNewPassword'].touched ||
+                            uppdateData['confirmNewPassword'].dirty)
+                        "
+                        class="mb-3"
+                      >
+                      <div class="row align-items-center">
+                        <div class="col-1">
+                          <i class="fa-solid fa-circle-info text-danger"></i>
+                        </div>
+                        <div class="col-10">
+                          <p
+                          class="text-danger w-100 mx-auto p-1 mb-0"
+                          *ngIf="
+                            uppdateData['confirmNewPassword'].getError('required')
+                          "
+                        >
+                          Field is required
+                        </p>
+                        <p
+                          class="text-danger w-100 mx-auto p-1 mb-0"
+                          *ngIf="
+                            uppdateData['confirmNewPassword'].getError('mismatch')
+                          "
+                        >
+                          Enter semilar password please
+                        </p>
+                        </div>
+                      </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <button
+                    type="submit"
+                    class="btn text-capitalize fw-semibold text-white w-100"
+                    [ngClass]="{'disabled btn-inactive': !uppdatePasswordForm.valid,
+    'btn-active':uppdatePasswordForm.valid,}"
+                  >
+                    Change password
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

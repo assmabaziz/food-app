@@ -1,0 +1,20 @@
+<section class="position-relative overflow-hidden d-flex flex-column justify-content-center align-items-center" >
+  <span class="d-flex justify-content-center align-items-center close" >
+    <button   mat-button (click)="onNoClick()">
+      <i class="fa-solid fa-close" ></i>
+    </button>
+  </span>
+  <h2 *ngIf="changeDialog">Edit category !</h2>
+  <h2 *ngIf="!changeDialog">Add category !</h2>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Category name</mat-label>
+      <input matInput [(ngModel)]="catName" aria-label="catName">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions [align] = "'end'">
+    <button mat-button [mat-dialog-close]="catName" cdkFocusInitial>save</button>
+  </div>
+</section>
+
+

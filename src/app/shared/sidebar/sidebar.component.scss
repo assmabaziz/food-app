@@ -1,0 +1,85 @@
+/*--------------------------------------------- variables ----------------------------------------------*/
+$main-color: #4aa35a;
+$main-transition: 0.3s;
+aside {
+  background-color: #1f263e;
+  border-top-right-radius: 58px;
+  transition: all 0.4s;
+  height: 100vh;
+  width: 110px;
+  ul {
+    li {
+      a {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 15.73px;
+        cursor: pointer;
+        position: relative;
+        transition: $main-transition;
+        color: #c7c7c7;
+        transition: all 0.4s;
+        .text {
+          transition: all 0.4s;
+        }
+        &:hover {
+          background-color: rgb(0, 146, 71, 0.1);
+        }
+        &.active {
+          background-color: rgb(0, 146, 71, 0.1);
+          border-right: 3px silod $main-color;
+          color:#fff;
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            width: 4px;
+            background-color: $main-color;
+          }
+        }
+
+      }
+    }
+  }
+&.side-bar-large {
+  width: 100%;
+  div {
+    width: 100%;
+    img {
+      width: fit-content;
+    }
+    li{
+      width: 100%;
+    a {
+      .text{
+        display: inline-block;
+
+      }
+    }
+  }
+  }
+
+}
+&.side-bar-small {
+width: 80px;
+div {
+  img {
+    width: 110%;
+
+  }
+}
+li{
+  text-align: center;
+  a {
+    i {
+      font-size: 1.6rem;
+    }
+    .text{
+      display: none;
+    }
+  }
+}
+}
+}

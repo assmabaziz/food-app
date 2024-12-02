@@ -1,0 +1,38 @@
+<section class="p-4 delete">
+  <div class="position-relative">
+    <span class="position-absolute d-flex justify-content-center align-items-center top-0 end-0 icon-close">
+      <button (click)="onNoClick()" class="bg-transparent border-0">
+        <i class="fa-solid fa-close"></i>
+      </button>
+    </span>
+    <div class="text-center mb-3">
+      <img src="../../../../../../assets/images/confirmdlete.svg" class="w-50" alt="confirmation delete" />
+    </div>
+    <div class="text-center">
+    <h4 *ngIf="data.name; else username" >
+      Delete <span>{{data.name}}?</span>
+    </h4>
+    <ng-template #username>
+      Delete <span>{{data.userName}}?</span>
+    </ng-template>
+    <p>
+      Are you sure you want to delete <span *ngIf="data.name; else username1">{{data.name}}?</span> if you are sure just click on delete it
+    </p>
+    <ng-template #username1>
+      <span>{{data.userName}}?</span>
+    </ng-template>
+    </div>
+    <!-- <div class="text-end">
+  <button class="btn btn-outline-danger" (click)="deletCategory(categoryID)">Delete this item</button>
+    </div> -->
+    <div mat-dialog-actions [align] = "'end'">
+      <button class="btn btn-outline-danger" *ngIf="data.name; else username2" [mat-dialog-close]="data" cdkFocusInitial>Delete <span>{{data.name}}</span></button>
+
+      <ng-template #username2>
+        <button class="btn btn-outline-danger" [mat-dialog-close]="data" cdkFocusInitial>Delete <span>{{data.userName}}?</span></button>
+
+      </ng-template>
+
+    </div>
+  </div>
+</section>

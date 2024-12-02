@@ -1,0 +1,129 @@
+<section class="main mb-3">
+  <div class="row align-items-center justify-content-between">
+    <div class="col-md-7">
+      <div class="px-4">
+        <h1 class="text-white">Categories <span>!</span></h1>
+        <p class="w-75 text-white">
+          You can now add your items that any user can order it from the
+          Application and you can edit
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 text-end">
+      <img
+        src="../../../../assets/images/bg-plates.svg"
+        class="w-75"
+        alt="eating vegan"
+      />
+    </div>
+  </div>
+</section>
+<section class="secondary py-3 mb-3">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="px-5">
+        <h2>Categories table details</h2>
+        <p>You can check all details</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="px-5 h-100 d-flex align-items-center justify-content-end">
+        <button class="btn text-white px-2" (click)="openDialog()">
+          Add new category
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="categories-list border-0 card overflow-hidden">
+  <mat-card class="example-card">
+    <div class="w-75 mx-auto my-3">
+      <div class="form-floating mb-3">
+        <input
+          type="search"
+          class="form-control w-100 rounded-2 border-secondary-subtle shadow-none"
+          id="floatingInput"
+          placeholder="Search by name"
+          [(ngModel)]="valueSearch"
+          (keydown.enter)="getAllCategories()"
+        />
+        <label for="floatingInput">Search by name</label>
+      </div>
+    </div>
+    <table class="w-100 border-0 text-center">
+      <thead>
+        <tr>
+          <th>Category name</th>
+          <th>Creation date</th>
+          <th>Modification date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="listCategories.length > 0">
+          <tr
+            *ngFor="let category of listCategories; let isEven = even"
+            [ngClass]="isEven ? 'bg-white' : 'bg-tr-even'"
+          >
+            <td>{{ category.name }}</td>
+            <td>{{ category.creationDate | date : "dd/MM/yyyy, hh:mm a" }}</td>
+            <td>
+              {{ category.modificationDate | date : "dd/MM/yyyy, hh:mm a" }}
+            </td>
+            <td>
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu"
+              >
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openDialogView(category)">
+                  <mat-icon class="text-success">visibility</mat-icon>
+                  <span>View</span>
+                </button>
+                <button mat-menu-item (click)="openDialogEdit(category)">
+                  <mat-icon class="text-success">edit_note</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="openDialogDelete('100ms', '100ms', category)"
+                >
+                  <mat-icon class="text-success">delete</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+      <ng-container *ngIf="listCategories.length == 0">
+        <tr>
+          <td colspan="4">
+            <div class="row justify-content-center align-items-center">
+            <div class="col-md-7">
+              <app-no-data></app-no-data>
+            </div>
+          </div>
+          </td>
+
+        </tr>
+      </ng-container>
+    </table>
+
+    <div>
+      <mat-paginator
+        class="bg-inf ms-auto"
+        [length]="fullResponce?.totalNumberOfRecords"
+        [pageSize]="pageSize"
+        [pageIndex]="pageNumber"
+        (page)="handlePageEvent($event)"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        aria-label="Select page"
+      >
+      </mat-paginator>
+    </div>
+  </mat-card>
+</section>

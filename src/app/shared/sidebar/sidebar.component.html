@@ -1,0 +1,24 @@
+<aside class="overflow-hidden d-flex" [ngClass]="valueSideBarChanged() ? 'side-bar-large' : 'side-bar-small' ">
+  <div class="h-75 d-flex flex-column justify-content-evenly">
+    <div (click)="toggleSideBar()">
+      <img src="./assets/images/3.png" alt="logo" />
+    </div>
+    <div class="col-md-12">
+      <ul class="text-white list-unstyled">
+        <ng-container *ngFor="let item of menu">
+           <li *ngIf="item.isActive" >
+            <span
+              ><a [routerLink]="item.link" class="d-block text-capitalize py-3 px-3 text-decoration-none " routerLinkActive="active">
+                <span><i class="fa-solid me-2" [class] = 'item.icon'></i></span>
+               <span class="text">{{item.text}}</span>
+                </a
+              ></span
+            >
+              </li>
+        </ng-container>
+
+      </ul>
+    </div>
+  </div>
+
+</aside>

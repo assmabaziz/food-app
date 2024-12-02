@@ -1,0 +1,19 @@
+section {
+  .icon-close {
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      color: red;
+      border: 1px solid red;
+      transition: 0.4s;
+      &:hover {
+        color: #fff;
+        background-color: red;
+      }
+    }
+  }
+}

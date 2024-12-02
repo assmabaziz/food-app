@@ -1,0 +1,19 @@
+section {
+  background-image: url("../../../../assets/images/Group 48101664.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  .container {
+    .content {
+      .drop-zone {
+        height: 80px;
+        max-width: 80px;
+        border-radius: 50%;
+        background-color: #ccc;
+        border: none;
+      }
+    }
+  }
+
+}

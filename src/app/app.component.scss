@@ -1,0 +1,62 @@
+/*--------------------------------------------- variables ----------------------------------------------*/
+$main-color: #4aa35a;
+$dark-gray: #3a3a3d;
+$light-gray: rgba(73, 73, 73, 0.6);
+$main-transition: 0.3s;
+section {
+  background-image: url("/src/assets/images/bg_login.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  .container {
+    .content {
+      border-radius: 15px;
+      .form {
+        h2 {
+          color: $dark-gray;
+        }
+        p {
+          color: $light-gray;
+        }
+        .input-group {
+          input {
+            &:focus {
+              box-shadow: none;
+              outline: none;
+            }
+          }
+        }
+        .show-password,
+        .hide-password {
+          transform: translateY(-50%);
+          right: 10px;
+          cursor: pointer;
+          z-index: 150;
+        }
+        .register {
+          color: $dark-gray;
+        }
+        .forgot-password {
+          color: $main-color;
+        }
+        button {
+          border: none;
+          border-radius: 8px;
+          padding: 1rem 0.8rem;
+          color: #fff;
+          transition: $main-transition;
+          &.btn-active {
+            background-color: $main-color;
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+          &.btn-inactive{
+            background-color: $light-gray;
+          }
+        }
+      }
+    }
+  }
+}

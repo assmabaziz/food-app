@@ -1,0 +1,68 @@
+<section class="p-4 position-relative">
+  <div class="icon-close d-flex justify-content-end align-items-center">
+    <span (click)="onNoClick()">
+      <mat-icon>close</mat-icon>
+    </span>
+  </div>
+
+  <mat-card class="example-card border-0">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="py-3 d-flex flex-column h-100">
+          <div class="mb-2">
+            <span class="h6 text-capitalize"> recipe: </span>
+            <span> {{ data.name }}</span>
+          </div>
+          <div class="mb-2">
+            <span class="h6 text-capitalize"> price: </span>
+            <span> {{ data.price }}</span>
+          </div>
+          <div class="mb-2">
+            <span class="h6"> Description: </span>
+            <span> {{ data.description }}</span>
+          </div>
+          <div class="mb-2">
+            <span class="h6 text-capitalize"> tag: </span>
+            <span> {{ data.tag.name }}</span>
+          </div>
+          <div lass="mb-2">
+            <span class="h6"> Category: </span>
+            <span *ngFor="let item of data.category">
+              <span> {{ item.name }}</span>
+            </span>
+          </div>
+          <div class="mb-2">
+            <span class="h6"> Creation date: </span>
+            <span> {{ data.creationDate | date : "short" }}</span>
+          </div>
+          <div>
+            <span class="h6"> Modification date: </span>
+            <span> {{ data.modificationDate | date : "short" }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="d-flex align-items-start justify-content-center py-3">
+          <ng-container *ngIf="data.imagePath; else noImg">
+            <img
+              class="w-100"
+              [src]="baseUrlImg + data.imagePath"
+              [alt]="data.name"
+            />
+          </ng-container>
+          <ng-template #noImg>
+            <img
+              class="w-100"
+              src="./assets/images/dummy-image-square.jpg"
+              class="w-75"
+              alt="no profile image"
+            />
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-end py-4">
+      <button class="add-to-favorite px-3 py-2">Add to favorite</button>
+    </div>
+  </mat-card>
+</section>

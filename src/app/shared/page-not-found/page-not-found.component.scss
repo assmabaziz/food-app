@@ -1,0 +1,42 @@
+/*--------------------------------------------- variables ----------------------------------------------*/
+$main-color: #4aa35a;
+$main-transition: 0.3s;
+section {
+height: 100vh;
+background-image: url('../../../assets/images/bgNotFoundPage.png');
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+.container {
+  h1, span {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1F263E;
+  }
+  h2 {
+  font-size: 2rem;
+  color: $main-color;
+  }
+  p {
+  color: #1F263E;
+  }
+  button {
+    border-radius: 8px;
+    background-color: $main-color;
+    span {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+}
+}
+
+/*
+
+{
+
+}
+
+
+*/

@@ -1,0 +1,103 @@
+<section>
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-6">
+        <div class="content p-3 bg-white">
+          <div class="logo text-center">
+            <img src="./assets/images/logo.svg" alt="logo" />
+          </div>
+          <div class="form">
+            <form
+              [formGroup]="accountVerificationForm"
+              (ngSubmit)="onVerify(verificationForm)"
+              #verificationForm="ngForm"
+            >
+              <h2>Confirm password</h2>
+              <p>
+                <span class="text-capitalize">welcome! please</span> enter code
+                sent to your email
+              </p>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <div class="input-group mb-1">
+                      <span class="input-group-text" id="basic-addon4">
+                        <i class="fa-solid fa-envelope"></i>
+                      </span>
+                      <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Enter your email"
+                        aria-describedby="basic-addon4"
+                        formControlName="email"
+                        readonly
+                      />
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <div class="input-group mb-1">
+                      <span class="input-group-text" id="basic-addon8">
+                        <i class="fa-solid fa-unlock"></i>
+                      </span>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter your code"
+                        aria-describedby="basic-addon8"
+                        formControlName="code"
+                      />
+                    </div>
+                    <ng-container
+                      *ngIf="
+                        formVerify['code'].errors &&
+                        (formVerify['code'].touched || formVerify['code'].dirty)
+                      "
+                    >
+                      <div class="row align-items-center">
+                        <div class="col-1">
+                          <i class="fa-solid fa-circle-info text-danger"></i>
+                        </div>
+                        <div class="col-10">
+                          <p
+                            class="text-danger w-100 mx-auto p-1 mb-0"
+                            *ngIf="formVerify['code'].getError('required')"
+                          >
+                            Code is required
+                          </p>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-end align-items-center mb-4">
+                <a
+                  routerLink="/auth/login"
+                  class="text-decoration-none forgot-password"
+                  >Login now?</a
+                >
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <button
+                    type="submit"
+                    class="btn text-capitalize fw-semibold text-white w-100"
+                    [ngClass]="{
+                      'disabled btn-inactive': !accountVerificationForm.valid,
+                      'btn-active': accountVerificationForm.valid
+                    }"
+                  >
+                    send
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

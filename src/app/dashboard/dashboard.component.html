@@ -1,0 +1,15 @@
+<section >
+  <div class="container-fluid h-100 position-relative">
+    <div class="row h-100" >
+      <div class="p-0" [ngClass]="valueSideBarChanged() ? 'col-2' :   'col-1'">
+        <div class="container-side-bar position-fixed top-0 bottom-0">
+          <app-sidebar></app-sidebar>
+        </div>
+      </div>
+      <div  [ngClass]="valueSideBarChanged() ? 'col-10' :   'col-11'">
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+/*--------------------------------------------- variables ----------------------------------------------*/
+$main-color: #4aa35a;
+section {
+  border-radius: 15px;
+  &.main {
+    background-image: url("../../../assets/images/bgHomeDashboard.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      span {
+        font-size: 2rem;
+        color: #dfe0e0;
+      }
+    }
+img {
+  animation: move-image 2s linear 2s infinite alternate;
+}
+  }
+  &.secondary {
+    background-color: #F0FFEF;
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+      span {
+        color: $main-color;
+        font-weight: 600;
+      }
+    }
+    button {
+      background-color: $main-color;
+    }
+  }
+  @keyframes move-image {
+    from {transform: translateY(13px);}
+    to {transform: translateY(0px);}
+  }
+}

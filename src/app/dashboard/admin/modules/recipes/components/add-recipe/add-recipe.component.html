@@ -1,0 +1,203 @@
+<section class="my-3 secondary py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 d-flex align-items-center">
+        <div class="px-5">
+          <!-- <h2 *ngIf="isViewPage">View <span class="text-main">the Recipe !</span></h2> -->
+          <!-- <h2 *ngIf="isUpdatedPage && !isViewPage  ">Edit <span class="text-main">the Recipe !</span></h2> -->
+          <h2>Fill the recipe !</h2>
+          <p>
+            you can now fill the meals easily using the table and form , click
+            here and sill it with the table !
+          </p>
+        </div>
+      </div>
+      <div class="col-md-3 d-flex align-items-center">
+        <div>
+          <button
+            type="submit"
+            class="btn text-white"
+            [routerLink]="['/dashboard/admin/recipes']"
+          >
+            All Recipes <i class="fa-solid fa-arrow-right pl-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="recipe-content">
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm)">
+    <div class="row">
+      <div class="col-md-8">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Recipe name</mat-label>
+          <input matInput placeholder="Recipe name" formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Price</mat-label>
+          <input matInput placeholder="Placeholder" formControlName="price" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Tags</mat-label>
+          <mat-select formControlName="tagId">
+            <mat-option *ngFor="let tag of tags" [value]="tag.id">{{
+              tag.name
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Category</mat-label>
+          <mat-select multiple formControlName="categoriesIds">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category.id"
+              >{{ category.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="example-full-width" class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            placeholder="Ex. describe your recipe"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <input type="file" (change)="fileChangeEvent($event)" formControlName="recipeImage"/>
+
+      <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="4 / 3"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded($event)"
+    ></image-cropper>
+    <!-- <img [src]="croppedImage"  /> -->
+
+      <!-- <div>
+        <ngx-dropzone
+          (change)="onSelect($event)"
+          [multiple]="false"
+          [disabled]="isViewPage"
+          class="h-100"
+        >
+          <ngx-dropzone-label *ngIf="!imgSrc">
+            <i class="fa-solid fa-upload fa-3x mb-3"></i>
+            <div>
+              drag & drop or
+              <span class="text-main"> Choose an item image to upload </span>
+            </div>
+          </ngx-dropzone-label>
+          <ngx-dropzone-label *ngIf="imgSrc">
+            <img [src]="imgSrc" alt="" class="w-25" />
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview
+            ngProjectAs="ngx-dropzone-preview"
+            [removable]="true"
+            (removed)="onRemove(f)"
+            *ngFor="let f of files"
+            [file]="f"
+          >
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
+      </div> -->
+      <div class="d-flex justify-content-end gap-4 my-4">
+        <button
+          type="button"
+          class="px-4 py-1 border-0 rounded-2 cancel"
+          [routerLink]="['../']"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="px-4 py-1 rounded-2 border-0 save">
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section>
+
+
+  <!-- <ngx-dropzone
+  (change)="onSelect($event)"
+  [multiple]="false"
+  [disabled]="isViewPage"
+  class="h-100"
+>
+  <ngx-dropzone-label *ngIf="!imgSrc">
+    <i class="fa-solid fa-upload fa-3x mb-3"></i>
+    <div>
+      drag & drop or
+      <span class="text-main"> Choose an item image to upload </span>
+    </div>
+  </ngx-dropzone-label>
+  <ngx-dropzone-label *ngIf="imgSrc">
+    <img [src]="imgSrc" alt="" class="w-25" />
+  </ngx-dropzone-label>
+  <ngx-dropzone-image-preview
+    ngProjectAs="ngx-dropzone-preview"
+    [removable]="true"
+    (removed)="onRemove(f)"
+    *ngFor="let f of files"
+    [file]="f"
+  >
+  </ngx-dropzone-image-preview>
+</ngx-dropzone> -->
+
+
+  <div class="row">
+<div class="col-6 mx-auto">
+
+<!-- <form action="" [formGroup]="waloForm" (ngSubmit)="onSubmit(waloForm)">
+
+  <input type="file" (change)="fileChangeEvent($event)" formControlName="inputFile"/>
+
+  <image-cropper
+  [imageChangedEvent]="imageChangedEvent"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="4 / 3"
+  (imageCropped)="imageCropped($event)"
+  (imageLoaded)="imageLoaded($event)"
+  (cropperReady)="cropperReady()"
+  (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+<img [src]="croppedImage"  />
+
+
+<button type="submit" class="btn btn-success p-2">click here</button>
+
+</form> -->
+
+
+</div>
+  </div>
+</section>

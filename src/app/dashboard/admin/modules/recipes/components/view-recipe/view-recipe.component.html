@@ -1,0 +1,78 @@
+<section class="h-75">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title-group
+            class="d-flex justify-content-between align-items-center"
+          >
+            <div class="w-100 h-100 p-3">
+              <div>
+                <span class="me-2 h6"> Name: </span>
+                <span>
+                  {{ recipeData.name }}
+                </span>
+              </div>
+              <div>
+                <span class="me-2 h6"> Creation date: </span>
+                <span>
+                  {{ recipeData.creationDate | date : "short" }}
+                </span>
+              </div>
+
+              <div>
+                <span class="me-2 h6"> Modification date: </span>
+                <span>
+                  {{ recipeData.modificationDate | date : "short" }}
+                </span>
+              </div>
+
+              <div>
+                <span class="me-2 h6"> Price: </span>
+                <span>
+                  {{ recipeData.price }}
+                </span>
+              </div>
+              <div>
+                <span class="me-2 h6"> Tag: </span>
+                <span>
+                  {{ recipeData.tag.name }}
+                </span>
+              </div>
+              <div>
+                <span class="me-2 h6"> Category: </span>
+                <ng-container *ngIf="recipeData.category.length > 1 ; else elseTemplate">
+                  <span *ngFor="let item of recipeData.category">
+                    {{ item.name }}
+                  </span>
+                </ng-container>
+
+                <ng-template #elseTemplate>
+                  <span *ngFor="let item of recipeData.category">
+                    {{ item.name }}
+                  </span>
+                </ng-template>
+
+
+
+
+              </div>
+            </div>
+            <div>
+              <img
+                mat-card-lg-image
+                [src]="pathImg+recipeData.imagePath"
+              />
+            </div>
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="p-3">
+            <h6>Description:</h6>
+            {{ recipeData.description }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

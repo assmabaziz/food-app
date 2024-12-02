@@ -1,0 +1,160 @@
+<section class="main mb-3">
+  <div class="row align-items-center justify-content-between">
+    <div class="col-md-7">
+      <div class="px-4">
+        <h1 class="text-white">Users <span>list</span></h1>
+        <p class="w-75 text-white">
+          You can now check your users list that any other admin can see it from
+          the application and you can edit
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4 text-end">
+      <img
+        src="./assets/images/bg-plates.svg"
+        class="w-75"
+        alt="eating vegan"
+      />
+    </div>
+  </div>
+</section>
+<section class="secondary py-3 mb-3">
+  <div class="px-5">
+    <h2>Users table details</h2>
+    <p>You can check all details</p>
+  </div>
+</section>
+<section class="categories-list border-0 card overflow-hidden">
+  <div class="row my-3">
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Search user</mat-label>
+        <mat-select [(ngModel)]="selectSearch">
+          <mat-option value="userName">Name</mat-option>
+          <mat-option value="country">Country</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field class="example-form-field w-100">
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="valueSearch"
+          (keydown.enter)="getAllUsers()"
+        />
+        <mat-label>Enter value then press enter</mat-label>
+        <mat-icon matSuffix class="mat-18">search</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="groups" (selectionChange)="getAllUsers()">
+          <mat-option value="2">User</mat-option>
+          <mat-option value="1">Admin</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <button
+      mat-fab color="warm"
+        color="warn"
+        type="button"
+        aria-label="Example icon button with a delete icon"
+        class="px-3 py-3"
+        (click)="clearAllFilters()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <table class="w-100 border-0 text-center">
+    <thead>
+      <tr>
+        <th scope="col">User name</th>
+        <th scope="col">Image</th>
+        <th scope="col">group</th>
+        <th scope="col">country</th>
+        <th scope="col">creationDate</th>
+        <th scope="col">phoneNumber</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="usersList.length > 0">
+        <tr
+          *ngFor="let user of usersList; let isEven = even"
+          [ngClass]="isEven ? 'bg-white' : 'bg-tr-even'"
+        >
+          <td>{{ user.userName }}</td>
+          <td class="w-25">
+            <div *ngIf="user.imagePath">
+              <img
+                [src]="baseUrlImg + user.imagePath"
+                class="w-25 rounded-lg border-success"
+                [alt]="user.userName"
+              />
+            </div>
+            <div *ngIf="!user.imagePath">
+              <img
+                src="./assets/images/dummy-image-square.jpg"
+                class="w-25 rounded-lg border-success"
+                alt="no image"
+              />
+            </div>
+          </td>
+          <td>{{ user.group.name }}</td>
+          <td>{{ user.country }}</td>
+          <td>{{ user.creationDate | date : "short" }}</td>
+          <td>{{ user.phoneNumber }}</td>
+          <td>
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openDialogView(user)">
+                <mat-icon class="text-success">visibility</mat-icon>
+                <span>View</span>
+              </button>
+              <button
+                mat-menu-item
+                (click)="openDialogDelete('100ms', '100ms', user)"
+              >
+                <mat-icon class="text-success">delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+    <ng-container *ngIf="usersList.length == 0">
+      <tr>
+        <td colspan="6">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-7">
+              <app-no-data></app-no-data>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <div>
+    <mat-paginator
+      class="bg-inf ms-auto"
+      [pageSize]="pageSize"
+      [length]="fulresponse.totalNumberOfRecords"
+      [pageIndex]="pageNumber"
+      (page)="handlePageEvent($event)"
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</section>
