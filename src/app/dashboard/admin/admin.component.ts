@@ -16,7 +16,7 @@ export class AdminComponent {
   ngOnInit(): void {
     this._SharedService.onGetCurrentUser().subscribe({
       next:(res)=> {
-        console.log(res);
+        // console.log(res);
         this.adminData = res
       },error:(err)=> {
         console.log(err);

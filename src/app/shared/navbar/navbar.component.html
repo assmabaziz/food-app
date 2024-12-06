@@ -12,11 +12,11 @@
         <div class="row justify-content- align-items-center">
           <div class="col-10 ">
             <div class="d-flex align-items-center justify-content-end gap-3">
-              <div *ngIf="userData.imagePath">
-                <img [src]="imgBaseUrl+userData.imagePath" class="profile_image" [alt]="userData.userName" />
+              <div *ngIf="userData.imagePath" class="container-img bg-danger-subtle">
+                <img [src]="imgBaseUrl+userData.imagePath" class="profile_image w-100"  [alt]="userData.userName" />
               </div>
               <ng-container *ngIf="!userData.imagePath">
-                <img src="./assets/images/pfile_image.svg" class="profile_image" alt="profile image">
+                <img src="./assets/images/pfile_image.svg" class="profile_image w-100" alt="profile image" />
               </ng-container>
 
                <div>

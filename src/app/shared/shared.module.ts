@@ -22,6 +22,7 @@ import { SeparatorPipe } from './pipes/separator.pipe';
 import { CurrentUserComponent } from './current-user/current-user.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 @NgModule({
   declarations: [
     SharedComponent,
@@ -50,7 +51,8 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
     MatSelectModule,
     NgIf,
     NgFor,
-    ImageCropperModule
+    ImageCropperModule,
+    NgxDropzoneModule,
   ],
   exports: [
     SidebarComponent,

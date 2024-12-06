@@ -3,8 +3,6 @@
     <div class="row">
       <div class="col-md-9 d-flex align-items-center">
         <div class="px-5">
-          <!-- <h2 *ngIf="isViewPage">View <span class="text-main">the Recipe !</span></h2> -->
-          <!-- <h2 *ngIf="isUpdatedPage && !isViewPage  ">Edit <span class="text-main">the Recipe !</span></h2> -->
           <h2>Fill the recipe !</h2>
           <p>
             you can now fill the meals easily using the table and form , click
@@ -75,11 +73,10 @@
       </div>
 
 
-      <!-- <div>
+      <div>
         <ngx-dropzone
           (change)="onSelect($event)"
           [multiple]="false"
-          [disabled]="isViewPage"
           class="h-100"
         >
           <ngx-dropzone-label *ngIf="!imgSrc">
@@ -101,22 +98,10 @@
           >
           </ngx-dropzone-image-preview>
         </ngx-dropzone>
-      </div> -->
+      </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-6 mx-auto">
 
     <input type="file" (change)="fileChangeEvent($event)" />
@@ -134,24 +119,9 @@
 
     <img [src]="croppedImage" class="w-25" />
 
-<!-- <img [src]="imgC" alt="" class="w-25" /> -->
+ <img [src]="imgC" alt="" class="w-25" />
   </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div> -->
 
       <div class="d-flex justify-content-end gap-4 my-4">
         <button

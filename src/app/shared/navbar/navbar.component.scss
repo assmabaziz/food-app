@@ -1,49 +1,56 @@
 nav {
-    background-color: #f8f9fb;
+  background-color: #f8f9fb;
+  border-radius: 16px;
+  .inner-search {
     border-radius: 16px;
-    .inner-search {
-      border-radius: 16px;
-      input {
-        &:focus {
-          outline: none;
-        }
-      }
-      .icon-search {
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      .profile_image {
-        height: 40px;
-        width: 40px;
+    input {
+      &:focus {
+        outline: none;
       }
     }
-    ul {
-      li {
-        a {
-          cursor: pointer;
-          &:hover {
-            background-color: #f1f1f1;
-          }
-        }
-      }
+    .icon-search {
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
     }
-    .notification {
-      cursor: pointer;
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 6px;
-        width: 6px;
-        border-radius: 50%;
-        background-color: red;
+  }
+  .container-img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    img {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+    }
+  }
+  ul {
+    li {
+      a {
+        cursor: pointer;
+        &:hover {
+          background-color: #f1f1f1;
+        }
       }
     }
   }
+  .notification {
+    cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 6px;
+      width: 6px;
+      border-radius: 50%;
+      background-color: red;
+    }
+  }
+}
 section {
-  transform: translate(-50% , -50%) ;
+  transform: translate(-50%, -50%);
   z-index: 1000;
   .close-form {
     height: 25px;
@@ -53,7 +60,7 @@ section {
     top: 15px;
     right: 15px;
     cursor: pointer;
-    transition:all 0.3s;
+    transition: all 0.3s;
     &:hover {
       background-color: #252525e1;
       color: white;

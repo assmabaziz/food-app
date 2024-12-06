@@ -1,1 +1,401 @@
-<p>update-profile works!</p>
+<section>
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-8">
+        <div class="content p-3 bg-white">
+          <div class="form">
+            <form
+              [formGroup]="updateProfileForm"
+              (ngSubmit)="updateUserProfile(myForm)"
+              #myForm="ngForm"
+              class="py-3"
+            >
+              <h2 class="mb-4">Update your profile</h2>
+              <div class="rows">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <div class="input-group mb-1">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="UserName"
+                          aria-describedby="basic-addon1"
+                          formControlName="userName"
+                        />
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          formRegister['userName'].errors &&
+                          (formRegister['userName'].touched ||
+                            formRegister['userName'].dirty)
+                        "
+                      >
+                        <div class="row align-items-center">
+                          <div class="col-1">
+                            <i class="fa-solid fa-circle-info text-danger"></i>
+                          </div>
+                          <div class="col-10">
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="updateProfileForm.get('userName')?.errors?.['required']"
+                            >
+                              User name is required
+                            </p>
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf=" updateProfileForm.get('userName')?.errors?.['minlength']"
+                            >
+                              At least 4 characters and end with numbers
+                            </p>
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="updateProfileForm.get('userName')?.errors?.['maxLength']"
+                            >
+                              Max 8 characters and end with numbers
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <div class="input-group mb-1">
+                        <span class="input-group-text" id="basic-addon4">
+                          <i class="fa-solid fa-envelope"></i>
+                        </span>
+                        <input
+                          type="email"
+                          class="form-control"
+                          placeholder="Enter your email"
+                          aria-describedby="basic-addon4"
+                          formControlName="email"
+                        />
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          formRegister['email'].errors &&
+                          (formRegister['email'].touched ||
+                            formRegister['email'].dirty)
+                        "
+                      >
+                        <div class="row align-items-center">
+                          <div class="col-1">
+                            <i class="fa-solid fa-circle-info text-danger"></i>
+                          </div>
+                          <div class="col-10">
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="updateProfileForm.get('email')?.errors?.['required']"
+                            >
+                              Email is required
+                            </p>
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="updateProfileForm.get('email')?.errors?.['email']"
+                            >
+                              Email Invalid Format
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <div class="input-group mb-1">
+                        <span class="input-group-text" id="basic-addon2">
+                          <i class="fa-solid fa-globe"></i>
+                        </span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Country"
+                          aria-describedby="basic-addon2"
+                          formControlName="country"
+                        />
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          formRegister['country'].errors &&
+                          (formRegister['country'].touched ||
+                            formRegister['country'].dirty)
+                        "
+                      >
+                        <div class="row align-items-center">
+                          <div class="col-1">
+                            <i class="fa-solid fa-circle-info text-danger"></i>
+                          </div>
+                          <div class="col-10">
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="
+                                formRegister['country'].getError('required')
+                              "
+                            >
+                              Country is required
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <div class="input-group mb-1">
+                        <span class="input-group-text" id="basic-addon5">
+                          <i class="fa-solid fa-mobile"></i>
+                        </span>
+                        <input
+                          type="tel"
+                          class="form-control"
+                          placeholder="Enter your phone number"
+                          aria-label="Username"
+                          aria-describedby="basic-addon5"
+                          formControlName="phoneNumber"
+                        />
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          formRegister['phoneNumber'].errors &&
+                          (formRegister['phoneNumber'].touched ||
+                            formRegister['phoneNumber'].dirty)
+                        "
+                      >
+                        <div class="row align-items-center">
+                          <div class="col-1">
+                            <i class="fa-solid fa-circle-info text-danger"></i>
+                          </div>
+                          <div class="col-10">
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="
+                                formRegister['phoneNumber'].getError('required')
+                              "
+                            >
+                              Phone number is required
+                            </p>
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="
+                                formRegister['phoneNumber'].getError('pattern')
+                              "
+                            >
+                              Only egyptian phone numbers
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <div class="input-group mb-1 position-relative">
+                        <span class="input-group-text" id="basic-addon3">
+                          <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input
+                          #password
+                          type="password"
+                          class="form-control"
+                          placeholder="Password"
+                          aria-label="Password"
+                          aria-describedby="basic-addon3"
+                          formControlName="password"
+                        />
+                        <span
+                          class="show-password position-absolute top-50"
+                          role="button"
+                          (click)="
+                            passwordShow = true;
+                            passwordShow == true
+                              ? (password.type = 'text')
+                              : (password.type = 'password')
+                          "
+                          [ngClass]="{ 'd-none': passwordShow }"
+                        >
+                          <i class="fa-solid fa-eye"></i>
+                        </span>
+                        <span
+                          class="hide-password position-absolute top-50 d-none"
+                          role="button"
+                          (click)="
+                            passwordShow = false;
+                            passwordShow == false
+                              ? (password.type = 'password')
+                              : (password.type = 'text')
+                          "
+                          [ngClass]="{ 'd-none': !passwordShow }"
+                        >
+                          <i class="fa-solid fa-eye-slash"></i>
+                        </span>
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          formRegister['password'].errors &&
+                          (formRegister['password'].touched ||
+                            formRegister['password'].dirty)
+                        "
+                        class="mb-3"
+                      >
+                        <div class="row align-items-center">
+                          <div class="col-1">
+                            <i class="fa-solid fa-circle-info text-danger"></i>
+                          </div>
+                          <div class="col-10">
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="updateProfileForm.get('password')?.errors?.['required']"
+                            >
+                              Password is required
+                            </p>
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="updateProfileForm.get('password')?.errors?.['pattern']"
+                            >
+                              At least 6 chars, one small letter, one capital
+                              letter, and one special character
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <div class="input-group mb-1 position-relative">
+                        <span class="input-group-text" id="basic-addon6">
+                          <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input
+                          #Repassword
+                          type="password"
+                          class="form-control"
+                          placeholder="Confirm password"
+                          aria-label="Password"
+                          aria-describedby="basic-addon6"
+                          formControlName="confirmPassword"
+                        />
+                        <span
+                          class="show-password position-absolute top-50"
+                          role="button"
+                          (click)="
+                            confirmPasswordShow = true;
+                            confirmPasswordShow == true
+                              ? (Repassword.type = 'text')
+                              : (Repassword.type = 'password')
+                          "
+                          [ngClass]="{ 'd-none': confirmPasswordShow }"
+                        >
+                          <i class="fa-solid fa-eye"></i>
+                        </span>
+                        <span
+                          class="hide-password position-absolute top-50 d-none"
+                          role="button"
+                          (click)="
+                            confirmPasswordShow = false;
+                            confirmPasswordShow == false
+                              ? (Repassword.type = 'password')
+                              : (Repassword.type = 'text')
+                          "
+                          [ngClass]="{ 'd-none': !confirmPasswordShow }"
+                        >
+                          <i class="fa-solid fa-eye-slash"></i>
+                        </span>
+                      </div>
+                      <ng-container
+                        *ngIf="
+                          formRegister['confirmPassword'].errors &&
+                          (formRegister['confirmPassword'].touched ||
+                            formRegister['confirmPassword'].dirty)
+                        "
+                        class="mb-3"
+                      >
+                        <div class="row align-items-center">
+                          <div class="col-1">
+                            <i class="fa-solid fa-circle-info text-danger"></i>
+                          </div>
+                          <div class="col-10">
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="
+                                formRegister['confirmPassword'].getError(
+                                  'required'
+                                )
+                              "
+                            >
+                              Field is required
+                            </p>
+                            <p
+                              class="text-danger w-100 mx-auto p-1 mb-0"
+                              *ngIf="
+                                formRegister['confirmPassword'].getError(
+                                  'mismatch'
+                                )
+                              "
+                            >
+                              Enter semilar password please
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center mb-4"
+              >
+                <div class="drop-zone w-50">
+                  <ngx-dropzone
+                    (change)="onSelect($event)"
+                    class="overflow-hidden d-flex justify-content-center align-items-center position-relative mh-100"
+                  >
+                    <ngx-dropzone-label>Upload image </ngx-dropzone-label>
+                    <i
+                      class="fa-solid fa-xmark-circle position-absolute top-0 z-3"
+                      id="iconDelete"
+                      (click)="onRemove($event); innerClick($event)"
+                    ></i>
+                    <ngx-dropzone-image-preview
+                      ngProjectAs="ngx-dropzone-preview"
+                      *ngFor="let f of files"
+                      [file]="f"
+                      class="m-0 p-0 mh-100"
+                    >
+                    </ngx-dropzone-image-preview>
+                  </ngx-dropzone>
+                </div>
+                <a
+                  routerLink="/dashboard/home"
+                  class="text-decoration-none forgot-password"
+                  >Back home?</a
+                >
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <button
+                    type="submit"
+                    class="btn text-capitalize fw-semibold text-white w-100"
+                    [ngClass]="{'disabled btn-inactive': !updateProfileForm.valid,
+    'btn-active':updateProfileForm.valid,}"
+                  >
+                    update
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -76,7 +76,7 @@ export class AddRecipeComponent {
     myData.append('description', data.value.description);
     myData.append('categoriesIds', data.value.categoriesIds);
     myData.append('tagId', data.value.tagId);
-    // myData.append('recipeImage', this.imgSrc);
+    myData.append('recipeImage', this.imgSrc);
   // myData.append('recipeImage', this.croppedImage.changingThisBreaksApplicationSecurity);
   myData.append('recipeImage', this.myBlob);
 
@@ -87,7 +87,6 @@ export class AddRecipeComponent {
     // console.log(this.files[0]);
     console.log(this.croppedImage);
 
-console.log(this.imgC);
 
 
     this._RecipeService.onAddRecipe(myData).subscribe({
@@ -109,7 +108,6 @@ console.log(this.imgC);
 
 
 
-
 myFile: any
 myBlob: any
 imgC :any
@@ -127,11 +125,11 @@ imageCropped(event: any) {
   this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
   // this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event);
   // this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.blob);
-console.log(this.sanitizer.bypassSecurityTrustUrl(event));
-console.log(this.sanitizer.bypassSecurityTrustUrl(event.blob));
+// console.log(this.sanitizer.bypassSecurityTrustUrl(event));
+// console.log(this.sanitizer.bypassSecurityTrustUrl(event.blob));
 
-this.myBlob = this.sanitizer.bypassSecurityTrustUrl(event.blob)
-this.imgC = this.sanitizer.bypassSecurityTrustResourceUrl(this.myBlob)
+// this.myBlob = this.sanitizer.bypassSecurityTrustUrl(event.blob)
+// this.imgC = this.sanitizer.bypassSecurityTrustResourceUrl(this.myBlob)
 
 // this.myFile = this.sayhi(this.croppedImage,  )
   // event.blob can be used to upload the cropped image
@@ -148,9 +146,7 @@ loadImageFailed() {
     // show message
 }
 
-sayhi(blob: Blob, fileName: string): File{
-  return new File([blob], fileName, {type: blob.type})
-  }
+
 
 
 

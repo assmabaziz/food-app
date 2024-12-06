@@ -1,8 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import {
-  Component,
-  inject,
-} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -25,39 +22,39 @@ export class RegisterComponent {
   passwordShow: boolean = false;
   confirmPasswordShow: boolean = false;
   files: File[] = [];
-  imgSrc: any
+  imgSrc: any;
   private readonly _AuthServiceService = inject(AuthServiceService);
   private readonly _ToastrService = inject(ToastrService);
   private readonly _Router = inject(Router);
   private readonly _formBuilder = inject(FormBuilder);
   registerForm: FormGroup = this._formBuilder.group(
     {
-      userName: ['', [
-        Validators.required,
-      ]],
+      userName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      country: ['', [
-        Validators.required,
-      ]],
-      phoneNumber: ['', [
-        Validators.required,
-        Validators.pattern(/^01[0125][0-9]{8}$/),
-      ]],
+      country: ['', [Validators.required]],
+      phoneNumber: [
+        '',
+        [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
+      ],
       profileImage: [''],
-      password: ['', [
-        Validators.required,
-        Validators.pattern(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
-        ),
-      ]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/
+          ),
+        ],
+      ],
       confirmPassword: ['', [Validators.required]],
     },
-     { validator: [this.checkPassword] } as FormControlOptions
+    { validator: [this.checkPassword] } as FormControlOptions
   );
+
   onSelect(event: any) {
     this.files.push(...event.addedFiles);
     // console.log(this.files[0]);
-    this.imgSrc =this.files[0]
+    this.imgSrc = this.files[0];
   }
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
@@ -81,10 +78,10 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this._AuthServiceService.registerUser(formdata).subscribe({
         next: (res) => {
-          if(res.message) {
+          if (res.message) {
             this.msgSuccess = res.message;
-            localStorage.setItem('userMail', form.value.email)
-          // console.log(formdata);
+            localStorage.setItem('userMail', form.value.email);
+            // console.log(formdata);
           }
         },
         error: (err) => {
@@ -97,14 +94,13 @@ export class RegisterComponent {
         },
         complete: () => {
           this._ToastrService.success(this.msgSuccess);
-          setTimeout(()=>this._Router.navigateByUrl('auth/confirm'),1500);
+          setTimeout(() => this._Router.navigateByUrl('auth/confirm'), 1500);
           // console.log(formdata);
-
         },
       });
     }
   }
-   checkPassword(group: AbstractControl) {
+  checkPassword(group: AbstractControl) {
     const password = group.get('password');
     const confirmPassword = group.get('confirmPassword');
     if (confirmPassword?.value === '') {
@@ -116,30 +112,4 @@ export class RegisterComponent {
   innerClick(event: Event) {
     event.stopPropagation();
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
 }
