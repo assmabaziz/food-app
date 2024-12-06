@@ -1,10 +1,4 @@
-export interface IData {
-  link: string,
-  icon: string,
-  text: string,
-  isActive : boolean,
-}
-export interface IProfileadmin {
+export interface IProfile {
   country:string,
   creationDate:string,
   group: IGroup,

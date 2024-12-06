@@ -3,9 +3,7 @@
     <div class="col-md-7">
       <div class="px-4">
         <h1 class="text-white">Recipes <span>!</span></h1>
-        <p class="w-75 text-white">
-          You can see all our recipes with details
-        </p>
+        <p class="w-75 text-white">You can see all our recipes with details</p>
       </div>
     </div>
     <div class="col-md-4 text-end">
@@ -51,11 +49,19 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-icon-button matTooltip="Primary" color="primary" aria-label="Example icon-button with a heart icon" (click)="clearAllFilters()">
-        <mat-icon>delete</mat-icon>
-      </button>
+        <button
+          type="button"
+          aria-label="Example icon button with a delete icon"
+          class="border-0 bg-transparent rounded-circle mw-100"
+          (click)="clearAllFilters()"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="restart_alt"
+          ></mat-icon>
+        </button>
       </div>
-
     </div>
     <table class="w-100 border-0 text-center">
       <thead>
@@ -84,7 +90,7 @@
                   [alt]="recipe.name"
                 />
               </div>
-              <div *ngIf="!recipe.imagePath" >
+              <div *ngIf="!recipe.imagePath">
                 <img
                   src="./assets/images/dummy-image-square.jpg"
                   class="w-25 rounded-lg border-success"
@@ -114,12 +120,13 @@
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button
-                  mat-menu-item
-                  (click)="openDialogViewRecipe(recipe)"
-                >
+                <button mat-menu-item (click)="openDialogViewRecipe(recipe)">
                   <mat-icon class="text-success">visibility</mat-icon>
                   <span>View</span>
+                </button>
+                <button mat-menu-item (click)="addToFav(recipe.id)">
+                  <mat-icon class="text-success">favorite</mat-icon>
+                  <span>Add to fav</span>
                 </button>
               </mat-menu>
             </td>

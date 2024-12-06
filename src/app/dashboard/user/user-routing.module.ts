@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
+import { UpdateProfileComponent } from 'src/app/shared/update-profile/update-profile.component';
 
 const routes: Routes = [
   { path: '', component: UserComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
         (m) => m.UserRecipesModule
       ),
   },
+  {path:'edit-profile', component: UpdateProfileComponent, title: 'update profile'}
 ];
 
 @NgModule({

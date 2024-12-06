@@ -41,12 +41,7 @@ export class AuthComponent{
           this._ToastrService.error(err.error.message)
         },complete:()=>{
           this._ToastrService.success('You have been successfully loged in')
-          if(localStorage.getItem('userGroup') === 'SuperAdmin'){
-            this._Router.navigate(['/dashboard/admin'])
-          }
-          else {
-            this._Router.navigate(['/dashboard/user'])
-          }
+          this._Router.navigate(['/dashboard'])
         }
        });
     }

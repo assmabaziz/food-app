@@ -1,0 +1,24 @@
+$main-color: #4aa35a;
+
+
+section {
+div {
+  .card-header{
+ .icon {
+    color: $main-color;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  mat-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  }
+
+  img {
+    height: 200px;
+    margin-bottom: 1rem;
+  }
+}
+}

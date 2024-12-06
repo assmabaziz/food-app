@@ -12,8 +12,8 @@ import {
 } from '@angular/forms';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { Router } from '@angular/router';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { LoadedImage } from 'ngx-image-cropper';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -135,52 +135,11 @@ export class RegisterComponent {
 
 
 
+  
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  private _DomSanitizer = inject(DomSanitizer)
-
-imageChangedEvent: Event | null = null;
-croppedImage: any  = '';
-
-
-fileChangeEvent(event: Event): void {
-  this.imageChangedEvent = event;
-}
-imageCropped(event: any) {
-this.croppedImage = this._DomSanitizer.bypassSecurityTrustUrl(event.objectUrl);
-// event.blob can be used to upload the cropped image
-}
-imageLoaded(image: LoadedImage) {
-  // show cropper
-}
-cropperReady() {
-  // cropper ready
-}
-loadImageFailed() {
-  // show message
-}
 }

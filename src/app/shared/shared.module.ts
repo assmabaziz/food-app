@@ -19,9 +19,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {MatSelectModule} from '@angular/material/select';
 import {NgIf, NgFor} from '@angular/common';
 import { SeparatorPipe } from './pipes/separator.pipe';
-import { ImageCropperComponent} from 'ngx-image-cropper';
 import { CurrentUserComponent } from './current-user/current-user.component';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 @NgModule({
   declarations: [
     SharedComponent,
@@ -32,6 +32,7 @@ import { CurrentUserComponent } from './current-user/current-user.component';
     PageNotFoundComponent,
     SeparatorPipe,
     CurrentUserComponent,
+    UpdateProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +50,7 @@ import { CurrentUserComponent } from './current-user/current-user.component';
     MatSelectModule,
     NgIf,
     NgFor,
-    ImageCropperComponent
+    ImageCropperModule
   ],
   exports: [
     SidebarComponent,
@@ -70,7 +71,7 @@ import { CurrentUserComponent } from './current-user/current-user.component';
     NgIf,
     NgFor,
     SeparatorPipe,
-    ImageCropperComponent
+    ImageCropperModule
   ],
 })
 export class SharedModule {}

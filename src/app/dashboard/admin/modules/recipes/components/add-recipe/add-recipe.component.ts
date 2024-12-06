@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, Input, signal } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ITag, ICategory } from '../../modals/irecipe';
 import { RecipeService } from '../../services/recipe.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
 
 @Component({
@@ -14,6 +14,7 @@ import { ImageCroppedEvent, LoadedImage } from 'ngx-image-cropper';
   styleUrls: ['./add-recipe.component.scss'],
 })
 export class AddRecipeComponent {
+
   tags: ITag[] = [];
   categories: ICategory[] = [];
   recipeData: any;
@@ -23,16 +24,11 @@ export class AddRecipeComponent {
   pathImg: string = 'https://upskilling-egypt.com:3006/';
   isUpdatedPage: boolean = false;
   recipeId: any;
-  isViewPage: boolean = false;
-  croppedImage: any = '';
-  imageChangedEvent: Event | null = null;
   private readonly _SharedService = inject(SharedService);
   private readonly _ToastrService = inject(ToastrService);
   private readonly _RecipeService = inject(RecipeService);
   private readonly _Router = inject(Router);
   private readonly _ActivatedRoute = inject(ActivatedRoute);
-  private _DomSanitizer = inject(DomSanitizer);
-
   /*======================================================== Handling Dropzone =========================================================================*/
   onSelect(event: any) {
     this.files.push(...event.addedFiles);
@@ -72,31 +68,8 @@ export class AddRecipeComponent {
     categoriesIds: new FormControl(null),
     recipeImage: new FormControl(null),
   });
-  // waloForm = new FormGroup({
-  //   inputFile: new FormControl(null)
-  // });
 
-  fileChangeEvent(event: Event): void {
-    this.imageChangedEvent = event;
-    // console.log(this.imageChangedEvent);
-  }
-  imageCropped(event: any) {
-    // this.croppedImage = this._DomSanitizer.bypassSecurityTrustUrl(event.blob);
-    this.croppedImage = event.base64;
-    // console.log(this.croppedImage);
-    //event.blob can be used to upload the cropped image
-  }
-  uploadCroppedImage() {
-    // Implement logic to upload the croppedImage (e.g., using HttpClient)
-    // console.log(this.croppedImage);
-
-  }
-  imageLoaded(image: LoadedImage) {
-    // show cropper
-    // console.log(image);
-  }
   onSubmit(data: FormGroup) {
-    console.log(data.value);
     let myData = new FormData();
     myData.append('name', data.value.name);
     myData.append('price', data.value.price);
@@ -104,10 +77,23 @@ export class AddRecipeComponent {
     myData.append('categoriesIds', data.value.categoriesIds);
     myData.append('tagId', data.value.tagId);
     // myData.append('recipeImage', this.imgSrc);
-    myData.append('recipeImage', this.croppedImage);
+  // myData.append('recipeImage', this.croppedImage.changingThisBreaksApplicationSecurity);
+  myData.append('recipeImage', this.myBlob);
+
+
+
+    console.log(data.value);
+
+    // console.log(this.files[0]);
+    console.log(this.croppedImage);
+
+console.log(this.imgC);
+
+
     this._RecipeService.onAddRecipe(myData).subscribe({
       next: (res) => {
-        // console.log(res);
+        console.log(res);
+
       },
       error: (err) => {
         console.log(err);
@@ -119,4 +105,60 @@ export class AddRecipeComponent {
       },
     });
   }
+
+
+
+
+
+myFile: any
+myBlob: any
+imgC :any
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  constructor(
+    private sanitizer: DomSanitizer
+  ) {
+  }
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+}
+imageCropped(event: any) {
+  this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
+  // this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event);
+  // this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.blob);
+console.log(this.sanitizer.bypassSecurityTrustUrl(event));
+console.log(this.sanitizer.bypassSecurityTrustUrl(event.blob));
+
+this.myBlob = this.sanitizer.bypassSecurityTrustUrl(event.blob)
+this.imgC = this.sanitizer.bypassSecurityTrustResourceUrl(this.myBlob)
+
+// this.myFile = this.sayhi(this.croppedImage,  )
+  // event.blob can be used to upload the cropped image
+}
+imageLoaded(image: LoadedImage) {
+    // show cropper
+}
+cropperReady() {
+  console.log(this.croppedImage);
+
+    // cropper ready
+}
+loadImageFailed() {
+    // show message
+}
+
+sayhi(blob: Blob, fileName: string): File{
+  return new File([blob], fileName, {type: blob.type})
+  }
+
+
+
+
+
+
+
+
+
+
 }

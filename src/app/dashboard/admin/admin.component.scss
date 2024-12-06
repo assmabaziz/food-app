@@ -1,0 +1,50 @@
+$main-color: #4aa35a;
+section {
+  height: 100%;
+
+  .profile-card {
+    background-image: url("../../../assets/images/4067aa9e6340a8f1acbaf6de5e8491b8.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100%;
+    box-shadow: 5px 5px 15px #000;
+    border-radius: 1rem 1rem 0 0;
+    .profile-header {
+      border-radius: 1rem 1rem 0 0;
+      position: relative;
+      top: 20%;
+      bottom: 0;
+      height: 80%;
+      .img-conainer {
+        position: absolute;
+        right: 50%;
+        top: -15%;
+        transform: translate(50%);
+        width: fit-content;
+        img {
+          height: 120px;
+          width: 120px;
+          border-radius: 50%;
+          border: 2px solid $main-color;
+        }
+.icon-container {
+  height: 30px;
+  width: 30px;
+  border: 1px solid #000;
+  position: absolute;
+  bottom: -15px;
+  right: 50%;
+  transform: translateX(50%);
+  cursor: pointer;
+  transition: all 0.4s;
+  &:hover {
+    color: #fff;
+    background-color: #313131;
+  }
+}
+      }
+    }
+
+  }
+}

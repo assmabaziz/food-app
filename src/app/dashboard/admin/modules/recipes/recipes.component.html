@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-4 text-end">
       <img
-        src="../../../../assets/images/bg-plates.svg"
+        src="./assets/images/bg-plates.svg"
         class="w-75"
         alt="eating vegan"
       />
@@ -28,10 +28,7 @@
     </div>
     <div class="col-md-6">
       <div class="px-5 h-100 d-flex align-items-center justify-content-end">
-        <button
-          class="btn text-white px-2"
-          routerLink="add"
-        >
+        <button class="btn text-white px-2" routerLink="add">
           Add new recipe
         </button>
       </div>
@@ -72,11 +69,19 @@
         </mat-select>
       </mat-form-field>
       <div>
-        <button mat-icon-button matTooltip="Primary" color="primary" aria-label="Example icon-button with a heart icon" (click)="clearAllFilters()">
-        <mat-icon>delete</mat-icon>
-      </button>
+        <button
+          type="button"
+          aria-label="Example icon button with a delete icon"
+          class="border-0 bg-transparent rounded-circle mw-100"
+          (click)="clearAllFilters()"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="restart_alt"
+          ></mat-icon>
+        </button>
       </div>
-
     </div>
     <table class="w-100 border-0 text-center">
       <thead>
@@ -105,9 +110,9 @@
                   [alt]="recipe.name"
                 />
               </div>
-              <div *ngIf="!recipe.imagePath" >
+              <div *ngIf="!recipe.imagePath">
                 <img
-                  src="../../../../assets/images/dummy-image-square.jpg"
+                  src="./assets/images/noRecipeImage.png"
                   class="w-25 rounded-lg border-success"
                   alt="no image"
                 />
@@ -135,17 +140,11 @@
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button
-                  mat-menu-item
-                  [routerLink]="['view', recipe.id]"
-                >
+                <button mat-menu-item [routerLink]="['view', recipe.id]">
                   <mat-icon class="text-success">visibility</mat-icon>
                   <span>View</span>
                 </button>
-                <button
-                  mat-menu-item
-                  [routerLink]="['edit', recipe.id]"
-                >
+                <button mat-menu-item [routerLink]="['edit', recipe.id]">
                   <mat-icon class="text-success">edit_note</mat-icon>
                   <span>Edit</span>
                 </button>

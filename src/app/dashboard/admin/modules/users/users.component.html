@@ -35,7 +35,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
       <mat-form-field class="example-form-field w-100">
         <input
           matInput
@@ -56,17 +56,18 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-md-2">
-      <button
-      mat-fab color="warm"
-        color="warn"
-        type="button"
-        aria-label="Example icon button with a delete icon"
-        class="px-3 py-3"
-        (click)="clearAllFilters()"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
+    <div class="col-md-1 p-0">
+<div class="h-100 d-flex align-items-center">
+  <button
+  type="button"
+  aria-label="Example icon button with a delete icon"
+  class=" border-0 bg-transparent rounded-circle mw-100"
+  (click)="clearAllFilters()"
+>
+<mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="restart_alt"></mat-icon>
+</button>
+</div>
+
     </div>
   </div>
   <table class="w-100 border-0 text-center">
@@ -98,7 +99,7 @@
             </div>
             <div *ngIf="!user.imagePath">
               <img
-                src="./assets/images/dummy-image-square.jpg"
+                src="./assets/images/unknownUser.jpeg"
                 class="w-25 rounded-lg border-success"
                 alt="no image"
               />

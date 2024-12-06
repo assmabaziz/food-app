@@ -29,4 +29,7 @@ onGetUserById(id: number): Observable<any> {
 onGetCurrentUser():Observable<any> {
   return this._HttpClient.get(`Users/currentUser`)
 }
+updateCurrentProfile(userData:any):Observable<any>{
+  return this._HttpClient.put('Users',userData);
+}
 }

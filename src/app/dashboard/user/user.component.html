@@ -1,1 +1,89 @@
-<p>user works!</p>
+<section class="py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="profile-card position-relative pt-5">
+        <div
+          class="profile-header py-5 bg-white d-flex flex-column align-items-center"
+        >
+          <div class="text-center pt-4">
+            <h2 class="text-capitalize">{{ userData.userName }}</h2>
+            <h5>{{ userData.group.name }}</h5>
+            <div class="img-conainer">
+              <span
+                class="icon-container d-flex justify-content-center align-items-center rounded-circle"
+                routerLink="edit-profile"
+              >
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Example home icon"
+                  fontIcon="edit"
+
+                ></mat-icon>
+              </span>
+              <ng-container *ngIf="userData.imagePath; else noImg">
+                <img
+                  [src]="imgBaseUrl + userData.imagePath"
+                  [alt]="userData.userName"
+                />
+              </ng-container>
+              <ng-template #noImg>
+                <img
+                  src="./assets/images/pfile_image.svg"
+                  alt="no profile image"
+                />
+              </ng-template>
+            </div>
+          </div>
+          <div class="w-100 px-4 py-5">
+            <div
+              class="profile-content d-flex align-items-center justify-content-between mb-3"
+            >
+              <span class="h5 m-0 me-2"> Country: </span>
+              <span>
+                <p class="m-0">{{ userData.country }}</p>
+              </span>
+            </div>
+            <div
+              class="profile-content d-flex align-items-center justify-content-between mb-3"
+            >
+              <span class="h5 m-0 me-2"> Email: </span>
+              <span>
+                <p class="m-0">{{ userData.email }}</p>
+              </span>
+            </div>
+            <div
+              class="profile-content d-flex align-items-center justify-content-between mb-3"
+            >
+              <span class="h5 m-0 me-2"> Phone number: </span>
+              <span>
+                <p class="m-0">{{ userData.phoneNumber }}</p>
+              </span>
+            </div>
+            <div
+              class="profile-content d-flex align-items-center justify-content-between mb-3"
+            >
+              <span class="h5 m-0 me-2"> Member since: </span>
+              <span>
+                <p class="m-0">
+                  {{ userData.creationDate | date : "dd/ MM/yyyy, hh: mm a" }}
+                </p>
+              </span>
+            </div>
+            <div
+              class="profile-content d-flex align-items-center justify-content-between mb-5 pb-3"
+            >
+              <span class="h5 m-0 me-2"> Last seen: </span>
+              <span>
+                <p class="m-0">
+                  {{
+                    userData.modificationDate | date : "dd/ MM/yyyy, hh: mm a"
+                  }}
+                </p>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

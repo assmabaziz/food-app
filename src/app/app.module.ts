@@ -10,7 +10,7 @@ import { GeneralInterceptor } from './core/general.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule,  ToastrModule.forRoot(), BrowserAnimationsModule, ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule,  ToastrModule.forRoot(), BrowserAnimationsModule],
   providers: [{
   provide: HTTP_INTERCEPTORS,
   useClass: GeneralInterceptor,

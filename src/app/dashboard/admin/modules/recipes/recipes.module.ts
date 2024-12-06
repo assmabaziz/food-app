@@ -23,7 +23,7 @@ import { EditRecipComponent } from './components/edit-recip/edit-recip.component
     RecipesRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
   ]
 })
 export class RecipesModule { }

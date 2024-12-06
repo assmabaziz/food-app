@@ -3,16 +3,16 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
-import { CategoriesService } from 'src/app/dashboard/admin/modules/cotegories/services/categories.service';
 import {
   IRecipeList,
   IRecipeData,
   ICategory,
   ITag,
 } from 'src/app/dashboard/admin/modules/recipes/modals/irecipe';
-import { RecipeService } from 'src/app/dashboard/admin/modules/recipes/services/recipe.service';
 import { SharedService } from 'src/app/shared/services/shared.service';
 import { ViewRecipeUserComponent } from './components/view-recipe-user/view-recipe-user.component';
+import { SystemUserServiceService } from './services/system-user-service.service';
+
 
 @Component({
   selector: 'app-user-recipes',
@@ -21,10 +21,10 @@ import { ViewRecipeUserComponent } from './components/view-recipe-user/view-reci
 })
 export class UserRecipesComponent {
   public _MatDialog = inject(MatDialog);
-  private readonly _CategoriesService = inject(CategoriesService);
-  private readonly _RecipeService = inject(RecipeService);
   private readonly _SharedService = inject(SharedService);
   private readonly _ToastrService = inject(ToastrService);
+  private readonly _SystemUserServiceService = inject(SystemUserServiceService);
+
   listRecipes: IRecipeList[] = [];
   fullResponce: IRecipeData = {} as IRecipeData;
   recipeCategories: ICategory[] = [];
@@ -55,7 +55,7 @@ export class UserRecipesComponent {
       tagId: this.tagId,
       categoryId: this.catgoryId,
     };
-    this._RecipeService.onGetAllRecipes(myParams).subscribe({
+    this._SystemUserServiceService.onGetAllRecipes(myParams).subscribe({
       next: (res) => {
         this.listRecipes = res?.data;
         this.fullResponce = res;
@@ -96,5 +96,16 @@ export class UserRecipesComponent {
         console.log(result);
       }
     });
+  }
+  addToFav(id:number){
+this._SystemUserServiceService.onAddTofav(id).subscribe({
+  next:(res)=> {
+    console.log(res);
+  }, error:(err)=> {
+    console.log(err);
+  }, complete:()=> {
+    this._ToastrService.success('Recipe Added to fav')
+  }
+})
   }
 }

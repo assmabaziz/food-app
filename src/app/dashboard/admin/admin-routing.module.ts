@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { AddRecipeComponent } from './modules/recipes/components/add-recipe/add-recipe.component';
-import { EditRecipComponent } from './modules/recipes/components/edit-recip/edit-recip.component';
-import { ViewRecipeComponent } from './modules/recipes/components/view-recipe/view-recipe.component';
-
+import { UpdateProfileComponent } from 'src/app/shared/update-profile/update-profile.component';
 const routes: Routes = [
   { path: '', component: AdminComponent },
   {
@@ -24,6 +21,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/recipes/recipes.module').then((m) => m.RecipesModule),
   },
+  {path:'edit-profile', component: UpdateProfileComponent, title: 'update profile'}
+
 ];
 
 @NgModule({
