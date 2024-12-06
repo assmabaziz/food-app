@@ -25,3 +25,40 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+### Food management app :
+responsive for above 768px tablets display.
+
+## Projuct Structure 
+# Admin Portal
+categories(add, view, edit, delit)
+users (view, delete)
+recipes (add, view, edit, delit)
+# User Portal
+recipes (view , add to fav)
+fav(view , delete)
+
+# Both user and admin can:
+register and log in
+recover forgotten passwords
+change password
+view profile and edit it
+
+
+## Used packages:
+
+# angular material
+# bootstrap
+# font-awesome
+# ngx-dropzone
+# jwt-decode
+# ngx-toastr
+# ngx-image-cropper(to be added soon)
+
+## Some sections to be changed soon or to be added
+# view user
+# view recipe
+# loader interceptor
+# comments
+# search user by email
+
